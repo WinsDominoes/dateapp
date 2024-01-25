@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'utils/gregorian_date.dart';
 
 void main() {
   runApp( MaterialApp(
+    title: 'Date App',
+    localizationsDelegates: const [ 
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
+    supportedLocales: const [
+      Locale('en', 'GB'), // English, UK
+      Locale('ar', 'AE'), // Arabic, UAE
+      Locale('en', 'IN'), // English, India
+    ],
        home: Home()
   ));
-}
-
-int daysBetween(DateTime from, DateTime to) {
-  from = DateTime(from.year, from.month, from.day);
-  to = DateTime(to.year, to.month, to.day);
-  return (to.difference(from).inHours / 24).round();
 }
 
 class Home extends  StatefulWidget {
@@ -21,27 +28,30 @@ class Home extends  StatefulWidget {
 class _HomeState extends State<Home> {
   DateTimeRange? _selectedDateRange;
 
-  // This function will be triggered when the floating button is pressed
-  void _show() async {
-    final DateTimeRange? result = await showDateRangePicker(
-      context: context,
-      firstDate: DateTime(1970, 1, 1),
-      lastDate: DateTime(2030, 12, 31),
-      currentDate: DateTime.now(),
-      saveText: 'Done',
-    );
-
-    if (result != null) {
-      // Rebuild the UI
-      // print(result.start.toString());
-      setState(() {
-        _selectedDateRange = result;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    // This function will be triggered when the floating button is pressed
+    void _show() async {
+      final DateTimeRange? result = await showDateRangePicker(
+        context: context,
+        firstDate: DateTime(1970, 1, 1),
+        lastDate: DateTime(2030, 12, 31),
+        locale: const Locale("en", "GB"),
+        currentDate: DateTime.now(),
+        saveText: 'Done',
+      );
+
+      if (result != null) {
+        // Rebuild the UI
+        // print(result.start.toString());
+        setState(() {
+          _selectedDateRange = result;
+        });
+      }
+    }
+
+    
+
     final startDate = _selectedDateRange?.start ?? DateTime(2020, 1, 1);
     final endDate= _selectedDateRange?.end ?? DateTime(2022, 1, 1);
 
@@ -63,7 +73,7 @@ class _HomeState extends State<Home> {
          ),
           body: _selectedDateRange == null
             ? const Center(
-                child: Text('Press the button to show the picker'),
+                child: Text('Press on the button in the bottom right-hand corner'),
               )
             : Padding(
                 padding: const EdgeInsets.all(30),
@@ -71,7 +81,7 @@ class _HomeState extends State<Home> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "First Date: ${startDate.toString().split(' ')[0]}",
+                      "First Date: ${DateFormat("dd/MM/yyyy").format(startDate).toString().split(' ')[0]}",
                       style: const TextStyle(fontSize: 24, color: Colors.black),
                     ),
 
@@ -80,7 +90,7 @@ class _HomeState extends State<Home> {
                     ),
                     
                     Text(
-                        "Second Date: ${endDate.toString().split(' ')[0]}",
+                        "Second Date: ${DateFormat("dd/MM/yyyy").format(endDate).toString().split(' ')[0]}",
                         style: const TextStyle(fontSize: 24, color: Colors.black)),
                     
                     const SizedBox(
@@ -106,6 +116,12 @@ class _HomeState extends State<Home> {
                     ),
                     Text(
                         "${diffYMD[0]} year(s)",
+                        style: const TextStyle(fontSize: 24, color: Colors.black)),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                        "Total Days: ${diffD}",
                         style: const TextStyle(fontSize: 24, color: Colors.black)),
                   ],
                 ),

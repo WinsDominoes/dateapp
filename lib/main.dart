@@ -54,7 +54,11 @@ class _HomeState extends State<Home> {
       DateTime.parse(endDate.toString())
     );
 
+    int diffYears = (difference.inDays ~/ 365).toInt();
+    int diffMonths = (difference.inDays ~/ 30).toInt(); 
+    int diffWeeks = (difference.inDays ~/ 7).toInt(); 
     int diffDays = difference.inDays;
+    
     int diffHours = difference.inHours % 24;
     int diffMinutes = difference.inMinutes % 60;
     int diffSeconds = difference.inSeconds % 60;
@@ -79,8 +83,8 @@ class _HomeState extends State<Home> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${startDate.toString().split(' ')[0]}",
-                      style: const TextStyle(fontSize: 14, color: Colors.black),
+                      "First Date: ${startDate.toString().split(' ')[0]}",
+                      style: const TextStyle(fontSize: 24, color: Colors.black),
                     ),
 
                     const SizedBox(
@@ -88,16 +92,33 @@ class _HomeState extends State<Home> {
                     ),
                     
                     Text(
-                        "${endDate.toString().split(' ')[0]}",
-                        style: const TextStyle(fontSize: 14, color: Colors.black)),
+                        "Second Date: ${endDate.toString().split(' ')[0]}",
+                        style: const TextStyle(fontSize: 24, color: Colors.black)),
                     
                     const SizedBox(
                       height: 20,
-                    ),
-
+                    ),  
                     Text(
-                        "Difference: $diffDays day(s) - $diffHours hour(s) - $diffMinutes minute(s) - $diffSeconds second(s)",
-                        style: const TextStyle(fontSize: 24, color: Colors.black))
+                        "$diffDays day(s)",
+                        style: const TextStyle(fontSize: 24, color: Colors.black)),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                        "$diffWeeks week(s)",
+                        style: const TextStyle(fontSize: 24, color: Colors.black)),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                        "$diffMonths month(s)",
+                        style: const TextStyle(fontSize: 24, color: Colors.black)),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                        "$diffYears year(s)",
+                        style: const TextStyle(fontSize: 24, color: Colors.black)),
                   ],
                 ),
               ),

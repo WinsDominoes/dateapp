@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'utils/gregorian_date.dart';
 
 void main() {
   runApp( MaterialApp(
@@ -39,29 +40,16 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Duration daysBetween(DateTime from, DateTime to) {
-     from = DateTime(from.year, from.month, from.day);
-     to = DateTime(to.year, to.month, to.day);
-     return to.difference(from);
-  }
-
   @override
   Widget build(BuildContext context) {
     final startDate = _selectedDateRange?.start ?? DateTime(2020, 1, 1);
     final endDate= _selectedDateRange?.end ?? DateTime(2022, 1, 1);
-    final difference = daysBetween(
-      DateTime.parse(startDate.toString()),
-      DateTime.parse(endDate.toString())
-    );
 
-    int diffYears = (difference.inDays ~/ 365).toInt();
-    int diffMonths = (difference.inDays ~/ 30).toInt(); 
-    int diffWeeks = (difference.inDays ~/ 7).toInt(); 
-    int diffDays = difference.inDays;
-    
-    int diffHours = difference.inHours % 24;
-    int diffMinutes = difference.inMinutes % 60;
-    int diffSeconds = difference.inSeconds % 60;
+    GregorianDate customDate = new GregorianDate();
+
+    List<int> diffYMD = GregorianDate.differenceInYearsMonthsDays(startDate, endDate);
+    List<int> diffMD = GregorianDate.differenceInMonths(startDate, endDate);
+    int diffD = GregorianDate.differenceInDays(startDate, endDate);
 
     return Scaffold(
          appBar: AppBar(
@@ -99,25 +87,25 @@ class _HomeState extends State<Home> {
                       height: 20,
                     ),  
                     Text(
-                        "$diffDays day(s)",
+                        "${diffYMD[3]} day(s)",
                         style: const TextStyle(fontSize: 24, color: Colors.black)),
                     const SizedBox(
                       height: 10,
                     ),
                     Text(
-                        "$diffWeeks week(s)",
+                        "${diffYMD[2]} week(s)",
                         style: const TextStyle(fontSize: 24, color: Colors.black)),
                     const SizedBox(
                       height: 10,
                     ),
                     Text(
-                        "$diffMonths month(s)",
+                        "${diffYMD[1]} month(s)",
                         style: const TextStyle(fontSize: 24, color: Colors.black)),
                     const SizedBox(
                       height: 10,
                     ),
                     Text(
-                        "$diffYears year(s)",
+                        "${diffYMD[0]} year(s)",
                         style: const TextStyle(fontSize: 24, color: Colors.black)),
                   ],
                 ),

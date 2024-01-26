@@ -32,6 +32,8 @@ dependencies:
     sdk: flutter
   flutter_localizations: # Add this line
     sdk: flutter         # Add this line
+  # App dynamic color theme
+  dynamic_color: ^1.6.8
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

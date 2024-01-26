@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'utils/gregorian_date.dart';
+import 'package:dynamic_color/dynamic_color.dart';
+
 
 void main() {
   runApp( MaterialApp(
     title: 'Date App',
+	theme: ThemeData(
+          useMaterial3: true,
+          colorSchemeSeed: Colors.blue,
+        ),
     localizationsDelegates: const [ 
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
@@ -61,15 +67,16 @@ class _HomeState extends State<Home> {
     List<int> diffMD = GregorianDate.differenceInMonths(startDate, endDate);
     int diffD = GregorianDate.differenceInDays(startDate, endDate);
 
+
     return Scaffold(
          appBar: AppBar(
             title: 
               const 
                 Text(
                   "Date App", 
-                  style: TextStyle(color: Colors.white),
                 ), 
-            backgroundColor: Colors.blueAccent,
+			elevation: 4,
+            shadowColor: Theme.of(context).shadowColor,
          ),
           body: _selectedDateRange == null
             ? const Center(

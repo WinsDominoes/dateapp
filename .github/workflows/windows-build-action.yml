@@ -25,7 +25,7 @@ jobs:
     - name: Release to GitHub
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "build\windows\x64\runner\Release\dateapp.exe"
+        artifacts: "build/windows/x64/runner/Release/dateapp.exe"
         tag: ${{ steps.version.outputs.content }}
         commit: ${{ github.sha }}
         allowUpdates: true 

@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     timeout-minutes: 25
     steps:
       - name: "Code Checkout"
@@ -58,8 +60,7 @@ jobs:
       - name: Release to GitHub
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/app-*-release.apk,build/app/outputs/bundle/release/app-release.aab,dateapp-linux-x64.tar.gz"
-          token: ${{ secrets.GH_TOKEN }}
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,dateapp-linux-x64.tar.gz"
           tag: ${{ steps.version.outputs.content }}
           commit: ${{ github.sha }}
           allowUpdates: true 

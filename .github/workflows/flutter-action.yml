@@ -12,8 +12,8 @@ jobs:
       - run: curl "https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json"
       - uses: subosito/flutter-action@v2.12.0
         with:
-          flutter-version: '3.7.7'
-          channel: 'main'
+          flutter-version: '3.16.9'
+          channel: 'stable'
       - run: flutter doctor
       - run: flutter pub get
       - run: flutter test

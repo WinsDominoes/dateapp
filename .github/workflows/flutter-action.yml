@@ -9,10 +9,13 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2.12.0
         with:
           flutter-version: '3.7.7'
           channel: 'main'
+
+      - run: curl "https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json"
+      - run: flutter doctor
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk

@@ -1,4 +1,4 @@
-name: "Windows - Build"
+name: "MacOS - Build"
 
 on: 
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
  build:
-   runs-on: windows-latest
+   runs-on: macos-latest
    steps:
     - name: "Code Checkout"
       uses: actions/checkout@v3
@@ -14,18 +14,20 @@ jobs:
     - name: "Flutter Action"
       uses: subosito/flutter-action@v2
       with:
-        channel: 'beta'
+        channel: 'stable'
+        architecture: x64
 
-    - name: "Flutter: Enable Windows Desktop"  
-      run: flutter config --enable-windows-desktop
+    - name: "Flutter: Enable MacOS Desktop"
+      run: flutter config --enable-macos-desktop
 
-    - name: "Flutter: Build for Windows"
-      run: flutter build windows
+    - name: "Flutter: Build MacOS"
+      run: flutter build macos
 
     - name: Release to GitHub
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "build\windows\x64\runner\Release\dateapp.exe"
+        artifacts: "build/macos/Build/Products/Release/dateapp.app"
         tag: ${{ steps.version.outputs.content }}
         commit: ${{ github.sha }}
         allowUpdates: true 
+

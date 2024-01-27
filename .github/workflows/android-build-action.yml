@@ -1,7 +1,7 @@
 name: Android Build APK
 on: [push]
 jobs:
-  android-build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -9,7 +9,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
-      - run: curl "https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json"
       - uses: subosito/flutter-action@v2.12.0
         with:
           flutter-version: '3.16.9'

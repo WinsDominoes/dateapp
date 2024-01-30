@@ -61,10 +61,10 @@ flutter_native_splash:
   web: false
   color: "#eeeeee"
   color_dark: "#333333"
-  image: assets/icon/icon.png
+  image: assets/app_icons/icon.png
 
 msix_config:
-  logo_path: assets\icon.png
+  logo_path: assets\app_icons\icon.png
   output_name: dateapp-windows
 
 # The following section is specific to Flutter packages.

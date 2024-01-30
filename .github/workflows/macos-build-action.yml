@@ -19,6 +19,11 @@ jobs:
         channel: 'stable'
         architecture: x64
 
+    - name: BUILD_VERSION Env (stable)
+      if: ${{ inputs.channel == 'stable' }}
+      run: |
+        echo "BUILD_VERSION=${{ inputs.version }}" >> $GITHUB_ENV
+
     - name: "Flutter: Enable MacOS Desktop"
       run: flutter config --enable-macos-desktop
 

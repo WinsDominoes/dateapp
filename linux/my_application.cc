@@ -58,7 +58,6 @@ static void my_application_activate(GApplication* application) {
      g_warning("Failed to set icon: %s", error->message);
   }
 
-
   fl_dart_project_set_dart_entrypoint_arguments(project, self->dart_entrypoint_arguments);
 
   FlView* view = fl_view_new(project);

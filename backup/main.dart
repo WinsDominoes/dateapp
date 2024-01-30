@@ -1,21 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'utils/gregorian_date.dart';
+import 'package:dynamic_color/dynamic_color.dart';
+
+import '../lib/utils/gregorian_date.dart';
+import 'home.dart';
+
+
+ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  useMaterial3: true,
+  textTheme: const TextTheme(
+    displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+    bodyLarge: TextStyle(fontSize: 18, color: Colors.black87),
+  ),
+  appBarTheme: const AppBarTheme(
+    color: Colors.blue,
+    iconTheme: IconThemeData(color: Colors.white),
+  ),
+  colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+);
+
+ThemeData darkTheme = ThemeData(
+  textTheme: const TextTheme(
+    displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+    bodyLarge: TextStyle(fontSize: 18, color: Colors.white70),
+  ),
+  appBarTheme: const AppBarTheme(
+    color: Colors.blue,
+    iconTheme: IconThemeData(color: Colors.white),
+  ),
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Colors.blue,
+    brightness: Brightness.dark,
+  ),
+);
 
 void main() {
 	runApp(MaterialApp(
 			title: 'Date Calculator',
-			theme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-        brightness: Brightness.light,
-        useMaterial3: true,
-      ),
-			darkTheme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-        brightness: Brightness.dark,
-        useMaterial3: true,
-      ),
+			theme: lightTheme,
+			darkTheme: darkTheme,
+			localizationsDelegates: const [
+				GlobalMaterialLocalizations.delegate,
+				GlobalWidgetsLocalizations.delegate,
+				GlobalCupertinoLocalizations.delegate,
+			],
 			supportedLocales: const [
 				Locale('en', 'GB'), // English, UK
 				Locale('ar', 'AE'), // Arabic, UAE
@@ -34,6 +65,7 @@ class _HomeState extends State<Home> {
 
 	@override
 	Widget build(BuildContext context) {
+		// This function will be triggered when the floating button is pressed
 		void _show() async {
 			final DateTimeRange? result = await showDateRangePicker(
 				context: context,
@@ -45,6 +77,8 @@ class _HomeState extends State<Home> {
 			);
 
 			if (result != null) {
+				// Rebuild the UI
+				// print(result.start.toString());
 				setState(() {
 					_selectedDateRange = result;
 				});
@@ -56,24 +90,34 @@ class _HomeState extends State<Home> {
 
 		GregorianDate customDate = new GregorianDate();
 
-		List<int> diffYMD = GregorianDate.differenceInYearsMonthsDays(startDate, endDate);
+		List<int> diffYMD =
+				GregorianDate.differenceInYearsMonthsDays(startDate, endDate);
 		List<int> diffMD = GregorianDate.differenceInMonths(startDate, endDate);
 		int diffD = GregorianDate.differenceInDays(startDate, endDate);
 
 		return Scaffold(
 			drawer: Drawer(
+				// column holds all the widgets in the drawer
 				child: Column(
 					children: <Widget>[
 						Expanded(
+							// ListView contains a group of widgets that scroll inside the drawer
 							child: ListView(),
 						),
+						// This container holds the align
 						Container(
+								// This align moves the children to the bottom
 								child: Align(
 										alignment: FractionalOffset.bottomCenter,
+										// This container holds all the children that will be aligned
+										// on the bottom and should not scroll with the above ListView
 										child: Container(
 												child: const Column(
 											children: <Widget>[
 												Divider(),
+												/* ListTile(
+													leading: Icon(Icons.settings),
+													title: Text('Settings')), */
 												ListTile(
 														leading: Icon(Icons.favorite),
 														title: Text('Authors: Win & Amy')),

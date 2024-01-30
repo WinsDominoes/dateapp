@@ -82,7 +82,7 @@ class _HomeState extends State<Home> {
 														title: Text('LGPL-2.1 license')),
 												ListTile(
 														leading: Icon(Icons.info),
-														title: Text('Version: v0.0.1'))
+														title: Text('Version: v0.0.2'))
 											],
 										))))
 					],

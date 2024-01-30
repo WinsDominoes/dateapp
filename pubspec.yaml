@@ -51,6 +51,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
+  msix: ^3.16.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -61,6 +62,10 @@ flutter_native_splash:
   color: "#eeeeee"
   color_dark: "#333333"
   image: assets/icon/icon.png
+
+msix_config:
+  logo_path: assets\icon.png
+  output_name: dateapp-windows
 
 # The following section is specific to Flutter packages.
 flutter:

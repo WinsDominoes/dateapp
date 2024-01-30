@@ -1,0 +1,8 @@
+app_id: 6C54ABD7-ABE5-418E-BA52-D1F4E27B3C34
+publisher: Win, Amy
+publisher_url: https://github.com/WinsDominoes/dateapp
+display_name: "Date Calculator"
+create_desktop_icon: true
+install_dir_name: "Date Calculator"
+locales:
+  - en

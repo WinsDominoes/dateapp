@@ -36,15 +36,11 @@ jobs:
         npm install -g appdmg
         mkdir -p build/${{ env.BUILD_VERSION }}
         appdmg appdmg.json build/dateapp-macos-universal.dmg
-        flutter_distributor package --platform=macos --targets pkg --skip-clean
-        mv dist/**/dateapp-*-macos.pkg build/dateapp-macos-universal.pkg
 
     - name: Release to GitHub
       uses: ncipollo/release-action@v1
       with:
-        artifacts: |
-          "build/dateapp-macos-universal.dmg"
-          "build/dateapp-macos-universal.pkg"
+        artifacts: "build/dateapp-macos-universal.dmg"
         tag: ${{ steps.version.outputs.content }}
         commit: ${{ github.sha }}
         allowUpdates: true 

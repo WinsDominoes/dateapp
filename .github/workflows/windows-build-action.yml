@@ -17,17 +17,24 @@ jobs:
       uses: subosito/flutter-action@v2
       with:
         channel: 'beta'
+      
+    - name: Generating Secrets
+      run: |
+        flutter config --enable-windows-desktop
+        flutter pub get
+        dart run build_runner build --delete-conflicting-outputs --enable-experiment=records,patterns
 
-    - name: "Flutter: Enable Windows Desktop"  
-      run: flutter config --enable-windows-desktop
-
-    - name: Build and create the .msix installer
-      run: dart run msix:create
+    - name: Build Windows Executable
+      run: |
+        dart pub global activate flutter_distributor
+        make innoinstall
+        flutter_distributor package --platform=windows --targets=exe --skip-clean
+        mv dist/**/dateapp-*-windows-setup.exe dist/dateapp-windows-x86_64-setup.exe
 
     - name: Release to GitHub
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "build\\windows\\x64\\runner\\Release\\dateapp-windows.msix"
+        artifacts: "dist/dateapp-windows-x86_64-setup.exe"
         tag: ${{ steps.version.outputs.content }}
         commit: ${{ github.sha }}
         allowUpdates: true 

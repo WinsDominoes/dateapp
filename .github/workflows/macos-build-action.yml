@@ -9,7 +9,6 @@ jobs:
    runs-on: macos-latest
    permissions:
      contents: write
-     timeout-minutes: 25
    steps:
     - name: "Code Checkout"
       uses: actions/checkout@v3

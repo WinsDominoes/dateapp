@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Date Calculator
+Comment=The go-to minimal date calculator
+Exec=/app/bin/dateapp %U
+Icon=net.winscloud.DateCalculator
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=Dates,Tools;
+StartupNotify=false

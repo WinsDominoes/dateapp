@@ -88,15 +88,6 @@ jobs:
 
           sudo chown -R $USER:$USER .
 
-          install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/share/metainfo/
-          install -Dm644 flatpak/com.adilhanney.ricochlime.metainfo.xml -t AppDir/usr/share/metainfo/
-
-          mkdir -p AppDir/usr/share/icons/hicolor/512x512/apps
-          install -Dm644 assets/icon/resized/icon-512x512.png AppDir/share/icons/hicolor/512x512/apps/com.adilhanney.ricochlime.png
-          install -Dm644 assets/icon/resized/icon-512x512.png AppDir/usr/share/icons/hicolor/512x512/apps/com.adilhanney.ricochlime.png
-
-          install -Dm644 flatpak/com.adilhanney.ricochlime.desktop -t AppDir/share/applications/
-
           tar -C AppDir -cvf $archiveName .
 
       - name: Release to GitHub

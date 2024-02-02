@@ -1,8 +1,9 @@
 name: Publish to GitHub Pages
 
-on: 
-    push:
-      tags: ['v*']
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
 
 permissions:
   contents: read

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'calendar.dart';
-import 'day.dart';
-import 'settings.dart';
+import 'pages/calendar.dart';
+import 'pages/day.dart';
+import 'pages/settings.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'constants/info.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import '../widgets/license.dart';
+import '../constants/info.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -152,32 +152,3 @@ Future<void> _dialogBuilder(BuildContext context) {
   );
 }
 
-class LicensePageCustom extends StatefulWidget {
-  @override
-  _LicensePageCustomState createState() => _LicensePageCustomState();
-}
-
-class _LicensePageCustomState extends State<LicensePageCustom> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: LicensePage(
-        applicationName: "Date Calculator",
-        applicationVersion: "v$versionString",
-        applicationIcon: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-              width: 80,
-              height: 80,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  alignment: Alignment.centerLeft,
-                  image: ExactAssetImage('assets/app_icons/icon.png')
-                )
-              ),
-          )
-        ),
-      ),
-    );
-  }
-}

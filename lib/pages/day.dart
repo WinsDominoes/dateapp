@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'utils/gregorian_date.dart';
+import '../utils/gregorian_date.dart';
 
 class DayScreen extends StatefulWidget {
   const DayScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class _DayScreenState extends State<DayScreen> {
 
 	@override
 	Widget build(BuildContext context) {
-		void _show() async {
+		void showDateDialog() async {
       final DateTime? pickedDate = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -144,7 +144,7 @@ class _DayScreenState extends State<DayScreen> {
 						),
 			// This button is used to show the date range picker
 			floatingActionButton: FloatingActionButton(
-				onPressed: _show,
+				onPressed: showDateDialog,
 				child: const Icon(Icons.today),
 			),
 		);

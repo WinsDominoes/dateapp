@@ -43,7 +43,6 @@ dependencies:
   sidebar_drawer: ^0.0.1+2
   flutter_adaptive_scaffold: ^0.1.7+2
   adaptive_navigation: ^0.0.4
-  package_info_plus: ^5.0.1
 
 dev_dependencies:
   flutter_test:

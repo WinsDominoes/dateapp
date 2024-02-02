@@ -17,8 +17,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
 		void _show() async {
 			final DateTimeRange? result = await showDateRangePicker(
 				context: context,
-				firstDate: DateTime(1970, 1, 1),
-				lastDate: DateTime(2030, 12, 31),
+				firstDate: DateTime(0, 1, 1),
+				lastDate: DateTime(3000, 12, 31),
 				locale: const Locale('en', 'GB'),
 				currentDate: DateTime.now(),
 				saveText: 'Done',

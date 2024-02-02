@@ -1,150 +1,108 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 
-import 'utils/gregorian_date.dart';
+import 'calendar.dart';
+import 'day.dart';
+import 'settings.dart';
 
 void main() {
-	runApp(MaterialApp(
-			title: 'Date Calculator',
-			theme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-        brightness: Brightness.light,
-        useMaterial3: true,
-      ),
-			darkTheme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-        brightness: Brightness.dark,
-        useMaterial3: true,
-      ),
-			supportedLocales: const [
-				Locale('en', 'GB'), // English, UK
-				Locale('ar', 'AE'), // Arabic, UAE
-				Locale('en', 'IN'), // English, India
-			],
-			home: Home()));
+  runApp(const MyApp());
 }
 
-class Home extends StatefulWidget {
-	@override
-	State<Home> createState() => _HomeState();
-}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-class _HomeState extends State<Home> {
-	DateTimeRange? _selectedDateRange;
+	static final _defaultLightColorScheme = ColorScheme.fromSwatch(primarySwatch: Colors.blue);
+	static final _defaultDarkColorScheme = ColorScheme.fromSwatch(primarySwatch: Colors.blue, brightness: Brightness.dark);
 
-	@override
-	Widget build(BuildContext context) {
-		void _show() async {
-			final DateTimeRange? result = await showDateRangePicker(
-				context: context,
-				firstDate: DateTime(1970, 1, 1),
-				lastDate: DateTime(2030, 12, 31),
-				locale: const Locale("en", "GB"),
-				currentDate: DateTime.now(),
-				saveText: 'Done',
-			);
-
-			if (result != null) {
-				setState(() {
-					_selectedDateRange = result;
-				});
-			}
-		}
-
-		final startDate = _selectedDateRange?.start ?? DateTime(2020, 1, 1);
-		final endDate = _selectedDateRange?.end ?? DateTime(2022, 1, 1);
-
-		GregorianDate customDate = new GregorianDate();
-
-		List<int> diffYMD = GregorianDate.differenceInYearsMonthsDays(startDate, endDate);
-		List<int> diffMD = GregorianDate.differenceInMonths(startDate, endDate);
-		int diffD = GregorianDate.differenceInDays(startDate, endDate);
-
-		return Scaffold(
-			drawer: Drawer(
-				child: Column(
-					children: <Widget>[
-						Expanded(
-							child: ListView(),
-						),
-						Container(
-								child: Align(
-										alignment: FractionalOffset.bottomCenter,
-										child: Container(
-												child: const Column(
-											children: <Widget>[
-												Divider(),
-												ListTile(
-														leading: Icon(Icons.favorite),
-														title: Text('Authors: Win & Amy')),
-												ListTile(
-														leading: Icon(Icons.description),
-														title: Text('LGPL-2.1 license')),
-												ListTile(
-														leading: Icon(Icons.info),
-														title: Text('Version: v0.0.3'))
-											],
-										))))
-					],
-				),
-			),
-			appBar: AppBar(
-				title: const Text("Date Calculator"),
-				elevation: 4,
-				shadowColor: Theme.of(context).shadowColor,
-			),
-			body: _selectedDateRange == null
-					? const Center(
-							child: Text('Select the date range by using the calendar button'),
-						)
-					: Padding(
-							padding: const EdgeInsets.all(30),
-							child: Column(
-								crossAxisAlignment: CrossAxisAlignment.start,
-								children: [
-									Text(
-										"First Date: ${DateFormat("dd/MM/yyyy").format(startDate).toString().split(' ')[0]}",
-										style: const TextStyle(fontSize: 24),
-									),
-									const SizedBox(
-										height: 20,
-									),
-									Text(
-											"Second Date: ${DateFormat("dd/MM/yyyy").format(endDate).toString().split(' ')[0]}",
-											style: const TextStyle(fontSize: 24)),
-									const SizedBox(
-										height: 20,
-									),
-									Text("${diffYMD[3]} day(s)",
-											style: const TextStyle(fontSize: 24)),
-									const SizedBox(
-										height: 10,
-									),
-									Text("${diffYMD[2]} week(s)",
-											style: const TextStyle(fontSize: 24)),
-									const SizedBox(
-										height: 10,
-									),
-									Text("${diffYMD[1]} month(s)",
-											style: const TextStyle(fontSize: 24)),
-									const SizedBox(
-										height: 10,
-									),
-									Text("${diffYMD[0]} year(s)",
-											style: const TextStyle(fontSize: 24)),
-									const SizedBox(
-										height: 20,
-									),
-									Text("Total Days: ${diffD}",
-											style: const TextStyle(fontSize: 24)),
-								],
-							),
-						),
-			// This button is used to show the date range picker
-			floatingActionButton: FloatingActionButton(
-				onPressed: _show,
-				child: const Icon(Icons.date_range),
-			),
+  @override
+  Widget build(BuildContext context) {
+		return DynamicColorBuilder (
+			builder: (lightColorScheme, darkColorScheme) {
+				return MaterialApp(
+					theme: ThemeData(
+						colorScheme: lightColorScheme ?? _defaultLightColorScheme,
+						useMaterial3: true,
+            navigationRailTheme: NavigationRailThemeData(
+              backgroundColor: Colors.black.withOpacity(0.03)
+            ),
+					),
+					darkTheme: ThemeData(
+            colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
+						useMaterial3: true,
+            navigationRailTheme: NavigationRailThemeData(
+              backgroundColor: Colors.white.withOpacity(0.03)
+            ),
+					),
+					home: const MyHomePage(),
+				);		
+			},
 		);
-	}
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  /// Creates a const [MyHomePage].
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _selectedTab = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return AdaptiveScaffold(
+      smallBreakpoint: const WidthPlatformBreakpoint(end: 700),
+      mediumBreakpoint: const WidthPlatformBreakpoint(begin: 700, end: 1000),
+      largeBreakpoint: const WidthPlatformBreakpoint(begin: 1000),
+      useDrawer: false,
+      selectedIndex: _selectedTab,
+      onSelectedIndexChange: (int index) {
+        setState(() {
+          _selectedTab = index;
+        });
+      },
+      destinations: const <NavigationDestination>[
+        NavigationDestination(
+          icon: Icon(Icons.calendar_month_outlined),
+          selectedIcon: Icon(Icons.calendar_month),
+          label: 'Calendar',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.calendar_today_outlined),
+          selectedIcon: Icon(Icons.calendar_today),
+          label: 'Day',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.settings_outlined),
+          selectedIcon: Icon(Icons.settings),
+          label: 'Settings',
+        ),
+      ],
+      body: (_) => _getScreen(context, _selectedTab),
+      smallBody: (_) => _getScreen(context, _selectedTab),
+      // Define a default secondaryBody.
+      // Override the default secondaryBody during the smallBreakpoint to be
+      // empty. Must use AdaptiveScaffold.emptyBuilder to ensure it is properly
+      // overridden.
+      smallSecondaryBody: AdaptiveScaffold.emptyBuilder,
+    );
+  }
+}
+
+Widget _getScreen(BuildContext context, int index) {
+  switch (index) {
+    case 0:
+      return const CalendarScreen();
+    case 1:
+      return const DayScreen();
+    case 2:
+      return const SettingsScreen();
+    default:
+      return const Text('Something went wrong');
+  }
 }

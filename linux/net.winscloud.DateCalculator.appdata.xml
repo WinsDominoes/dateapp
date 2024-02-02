@@ -19,7 +19,17 @@
 
   <description>
     <p>
-      Date Calculator
+      Date Calculator is an app to calculate differences between dates.
+    </p>
+    <ul>
+      <li>-Simple to use!</li>
+      <li>-Fast and responsive.</li>
+      <li>-Calculate differences between dates, with months, years, and weeks given.</li>
+      <li>-Find which day is a certain amount of dates away.</li>
+      <li>-Compatible with dynamic color themes.</li>
+      <li>-Open Source and ad-free.</li>
+    </ul>
+    <p>
     </p>
   </description>
 

@@ -9,7 +9,7 @@ class GregorianDate {
     return false;
   }
 
-  static List<int> differenceInYearsMonthsDays(DateTime dt1, DateTime dt2) {
+  /* static List<int> differenceInYearsMonthsDays(DateTime dt1, DateTime dt2) {
     List<int> simpleYear = [31,28,31,30,31,30,31,31,30,31,30,31];
     if(dt1.isAfter(dt2)) {
       DateTime temp = dt1;
@@ -34,9 +34,46 @@ class GregorianDate {
       months = 11;
       years--;
     }
-    int weeks = (days ~/ 7).toInt();
+    int weeks = (months ~/ 4).toInt();
+    return [years, months, weeks, days];
+  } */
+
+  static List<int> differenceInYearsMonthsDays(DateTime dt1, DateTime dt2) {
+    List<int> simpleYear = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    
+    if (dt1.isAfter(dt2)) {
+      DateTime temp = dt1;
+      dt1 = dt2;
+      dt2 = temp;
+    }
+
+    int totalMonthsDifference = ((dt2.year * 12) + (dt2.month - 1)) - ((dt1.year * 12) + (dt1.month - 1));
+    int years = (totalMonthsDifference / 12).floor();
+    int months = totalMonthsDifference % 12;
+
+    int daysInMonth1 = simpleYear[dt1.month - 1];
+
+    int days;
+    if (dt2.day >= dt1.day) {
+      days = dt2.day - dt1.day;
+    } else {
+      int remainingDaysInMonth1 = daysInMonth1 - dt1.day;
+      days = dt2.day + remainingDaysInMonth1;
+      months--;
+
+      if (months < 0) {
+        months = 11;
+        years--;
+      }
+    }
+
+    int totalDays = (years * 365) + (months * 30) + days;
+    int weeks = totalDays ~/ 7;
+    days = totalDays % 7;
+
     return [years, months, weeks, days];
   }
+
 
   static List<int> differenceInMonths(DateTime dt1, DateTime dt2){
     List<int> inYears = differenceInYearsMonthsDays(dt1, dt2);
@@ -49,7 +86,7 @@ class GregorianDate {
       DateTime temp = dt1;
       dt1 = dt2;
       dt2 = temp;
-    }
-    return dt2.difference(dt1).inDays;
+    } 
+    return dt2.difference(dt1).inDays + 1;
   }
 }

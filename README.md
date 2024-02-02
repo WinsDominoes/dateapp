@@ -11,7 +11,7 @@ App for calculating anything related to dates
 - Fast and responsive.
 - Calculate differences between dates, with months, years, and weeks given.
 - Find which day is a certain amount of dates away.
-- Compatible with dynamic color themes.
+- Compatible with dynamic color themes.wsssssssssssssssssssssss
 - Open Source and ad-free.
     
 ## Installation

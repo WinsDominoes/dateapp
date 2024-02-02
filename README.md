@@ -15,7 +15,24 @@ App for calculating anything related to dates
 - Open Source and ad-free.
     
 ## Installation
-Check over at the [GitHub Releases](https://github.com/WinsDominoes/dateapp/releases/) page. 
+### Android
+Check out `app-release.apk` over at the [GitHub Releases](https://github.com/WinsDominoes/dateapp/
+### Windows
+Check out ` dateapp-windows-x86_64-setup.exe ` over at the [GitHub Releases](https://github.com/WinsDominoes/dateapp/releases/) page. 
+### MacOS
+Check out `
+dateapp-macos-universal.dmg ` over at the [GitHub Releases](https://github.com/WinsDominoes/dateapp/releases/) page. 
+### Linux
+
+#### tar.gz
+Check out `
+dateapp-linux-x64.tar.gz ` over at the [GitHub Releases](https://github.com/WinsDominoes/dateapp/releases/) page. 
+
+#### Flatpak
+Check out Amy's [https://github.com/AtiusAmy/net.winscloud.DateCalculator](https://github.com/AtiusAmy/net.winscloud.DateCalculator) for Flatpak version
+
+### Web
+Check out [https://datecalculator.winscloud.net](https://datecalculator.winscloud.net)
 
 ## Build
 - Install [Flutter](https://docs.flutter.dev/get-started/install)

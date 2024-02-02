@@ -19,7 +19,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 				context: context,
 				firstDate: DateTime(1970, 1, 1),
 				lastDate: DateTime(2030, 12, 31),
-				locale: const Locale("en", "GB"),
+				locale: const Locale('en', 'GB'),
 				currentDate: DateTime.now(),
 				saveText: 'Done',
 			);
@@ -34,10 +34,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
 		final startDate = _selectedDateRange?.start ?? DateTime(2020, 1, 1);
 		final endDate = _selectedDateRange?.end ?? DateTime(2022, 1, 1);
 
-
-		List<int> diffYMD = GregorianDate.differenceInYearsMonthsDays(startDate, endDate);
-		List<int> diffMD = GregorianDate.differenceInMonths(startDate, endDate);
 		int diffD = GregorianDate.differenceInDays(startDate, endDate);
+
+    List<int> diffYMD = GregorianDate.differenceInYearsMonthsDays(diffD);
     
     dynamic startDateString = DateFormat("dd MMM yyyy").format(startDate).toString();
     dynamic endDateString = DateFormat("dd MMM yyyy").format(endDate).toString();

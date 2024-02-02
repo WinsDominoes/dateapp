@@ -9,77 +9,45 @@ class GregorianDate {
     return false;
   }
 
-  /* static List<int> differenceInYearsMonthsDays(DateTime dt1, DateTime dt2) {
-    List<int> simpleYear = [31,28,31,30,31,30,31,31,30,31,30,31];
-    if(dt1.isAfter(dt2)) {
-      DateTime temp = dt1;
-      dt1 = dt2;
-      dt2 = temp;
-    }
-    int totalMonthsDifference = ((dt2.year*12) + (dt2.month - 1)) - ((dt1.year*12) + (dt1.month - 1));
-    int years = (totalMonthsDifference/12).floor();
-    int months = totalMonthsDifference%12;
-    late int days;
-    if(dt2.day >= dt1.day) {days = dt2.day - dt1.day;}
-    else {
-      int monthDays = dt2.month == 3
-          ? (leapYear(dt2)? 29: 28)
-          : (dt2.month - 2 == -1? simpleYear[11]: simpleYear[dt2.month - 2]);
-      int day = dt1.day;
-      if(day > monthDays) day = monthDays;
-      days = monthDays - (day - dt2.day);
-      months--;
-    }
-    if(months < 0) {
-      months = 11;
-      years--;
-    }
-    int weeks = (months ~/ 4).toInt();
-    return [years, months, weeks, days];
-  } */
+  static List<int> differenceInYearsMonthsDays(int totalDays) {
+    // Define constants
+    const int daysInYear = 365;
+    const int daysInLeapYear = 366;
+    final List<int> daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-  static List<int> differenceInYearsMonthsDays(DateTime dt1, DateTime dt2) {
-    List<int> simpleYear = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    
-    if (dt1.isAfter(dt2)) {
-      DateTime temp = dt1;
-      dt1 = dt2;
-      dt2 = temp;
-    }
+    // Calculate years
+    int years = totalDays ~/ daysInYear;
+    int remainingDays = totalDays % daysInYear;
 
-    int totalMonthsDifference = ((dt2.year * 12) + (dt2.month - 1)) - ((dt1.year * 12) + (dt1.month - 1));
-    int years = (totalMonthsDifference / 12).floor();
-    int months = totalMonthsDifference % 12;
+    // Check for leap year
+    int daysInCurrentYear = (years % 4 == 0 && (years % 100 != 0 || years % 400 == 0))
+        ? daysInLeapYear
+        : daysInYear;
 
-    int daysInMonth1 = simpleYear[dt1.month - 1];
-
-    int days;
-    if (dt2.day >= dt1.day) {
-      days = dt2.day - dt1.day;
-    } else {
-      int remainingDaysInMonth1 = daysInMonth1 - dt1.day;
-      days = dt2.day + remainingDaysInMonth1;
-      months--;
-
-      if (months < 0) {
-        months = 11;
-        years--;
+    // Calculate months
+    int months = 0;
+    for (int i = 0; i < daysInMonth.length; i++) {
+      if (remainingDays < daysInMonth[i]) {
+        months = i;
+        break;
       }
+      remainingDays -= daysInMonth[i];
     }
 
-    int totalDays = (years * 365) + (months * 30) + days;
-    int weeks = totalDays ~/ 7;
-    days = totalDays % 7;
+    // Calculate weeks
+    int weeks = remainingDays ~/ 7;
+    remainingDays %= 7;
 
-    return [years, months, weeks, days];
+    // Output the result
+    print('$years years, $months months, $weeks weeks, and $remainingDays days');
+    return [years, months, weeks, remainingDays];
   }
 
-
-  static List<int> differenceInMonths(DateTime dt1, DateTime dt2){
+  /* static List<int> differenceInMonths(DateTime dt1, DateTime dt2){
     List<int> inYears = differenceInYearsMonthsDays(dt1, dt2);
     int difMonths = (inYears[0]*12) + inYears[1];
     return [difMonths, inYears[2]];
-  }
+  } */
 
   static int differenceInDays(DateTime dt1, DateTime dt2) {
     if(dt1.isAfter(dt2)) {
@@ -87,6 +55,6 @@ class GregorianDate {
       dt1 = dt2;
       dt2 = temp;
     } 
-    return dt2.difference(dt1).inDays + 1;
+    return dt2.difference(dt1).inDays;
   }
 }

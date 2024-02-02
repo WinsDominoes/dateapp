@@ -32,8 +32,9 @@ class _DayScreenState extends State<DayScreen> {
 		}
 
     final pickedDate = _selectedDate ?? DateTime.now();
-		List<int> diffYMD = GregorianDate.differenceInYearsMonthsDays(DateTime.now(), pickedDate);
+		// List<int> diffYMD = GregorianDate.differenceInYearsMonthsDays(DateTime.now(), pickedDate);
     int diffD = GregorianDate.differenceInDays(DateTime.now(), pickedDate);
+    List<int> diffYMD = GregorianDate.differenceInYearsMonthsDays(diffD);
 
     if(pickedDate.isBefore(DateTime.now())) {
       period = "in the past";

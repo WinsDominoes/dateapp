@@ -1,9 +1,4 @@
 name: "Linux ARM Build"
-
-on:
-  push:
-    tags: ["v*"]
-
 jobs:
   build:
     runs-on: ubuntu-latest

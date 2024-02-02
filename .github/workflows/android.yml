@@ -1,4 +1,4 @@
-name: "Android, Linux & Web - Build"
+name: "Android Build"
 
 on: 
   push:
@@ -35,15 +35,6 @@ jobs:
       - name: "Flutter: Get Packages"
         run: flutter pub get
 
-      - name: "Flutter: Build for Web"
-        run: flutter build web
-
-      - name: "Linux: Build for Linux"
-        run: flutter build linux
-
-      - name: "Linux: Tar Linux package"
-        run: tar -C build/linux/x64/release/bundle -czf dateapp-linux-x64.tar.gz .
-
       - name: Create key.properties
         run: |
           echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
@@ -60,7 +51,7 @@ jobs:
       - name: Release to GitHub
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,dateapp-linux-x64.tar.gz"
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab"
           tag: ${{ steps.version.outputs.content }}
           commit: ${{ github.sha }}
           allowUpdates: true 

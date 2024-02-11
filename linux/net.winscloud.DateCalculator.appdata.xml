@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>net.winscloud.DateCalculator</id>
+
+  <name>Date Calculator</name>
+  <summary>The go-to minimal date calculator</summary>
+  <url type="homepage">https://datecalculator.winscloud.net</url>
+  <url type="bugtracker">https://github.com/WinsDominoes/dateapp/issues</url>
+
+  <metadata_license>MIT</metadata_license>
+  <project_license>LGPL-2.1</project_license>
+  <developer_name>Win and Amy</developer_name>
+
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+
+  <description>
+    <p>
+      Date Calculator is an app to calculate differences between dates.
+    </p>
+    <ul>
+      <li>Simple to use!</li>
+      <li>Fast and responsive.</li>
+      <li>Calculate differences between dates, with months, years, and weeks given.</li>
+      <li>Find which day is a certain amount of dates away.</li>
+      <li>Compatible with dynamic color themes.</li>
+      <li>Open Source and ad-free.</li>
+    </ul>
+    <p>
+    </p>
+  </description>
+
+  <launchable type="desktop-id">net.winscloud.DateCalculator.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Calculate date differences from a click of a button!</caption>
+      <image>https://raw.githubusercontent.com/AtiusAmy/atiusamy.github.io/master/images/2020-07-12_17.29.36.png</image>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.0"/>
+  <releases>
+    <release version="0.0.5" date="2024-02-02">
+    </release>
+    <release version="0.0.4" date="2024-02-02">
+    </release>
+    <release version="0.0.3" date="2024-01-31">
+    </release>
+  </releases>
+</component>

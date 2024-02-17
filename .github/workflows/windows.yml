@@ -1,0 +1,39 @@
+name: "Windows - Build"
+
+on: 
+  push:
+    tags: ['v*']
+
+jobs:
+ build:
+   runs-on: windows-latest
+   permissions:
+      contents: write
+   steps:
+    - name: "Code Checkout"
+      uses: actions/checkout@v3
+    
+    - name: "Flutter Action"
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'beta'
+      
+    - name: Generating Secrets
+      run: |
+        flutter config --enable-windows-desktop
+        flutter pub get
+
+    - name: Build Windows Executable
+      run: |
+        dart pub global activate flutter_distributor
+        make innoinstall
+        flutter_distributor package --platform=windows --targets=exe --skip-clean
+        mv dist/**/dateapp-*-windows-setup.exe dist/dateapp-windows-x86_64-setup.exe
+
+    - name: Release to GitHub
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "dist/dateapp-windows-x86_64-setup.exe"
+        tag: ${{ steps.version.outputs.content }}
+        commit: ${{ github.sha }}
+        allowUpdates: true 

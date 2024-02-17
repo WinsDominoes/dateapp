@@ -1,0 +1,47 @@
+name: "MacOS - Build"
+
+on: 
+  push:
+    tags: ['v*']
+
+jobs:
+ build:
+   runs-on: macos-latest
+   permissions:
+     contents: write
+   steps:
+    - name: "Code Checkout"
+      uses: actions/checkout@v3
+    
+    - name: "Flutter Action"
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+        architecture: x64
+
+    - name: BUILD_VERSION Env (stable)
+      if: ${{ inputs.channel == 'stable' }}
+      run: |
+        echo "BUILD_VERSION=${{ inputs.version }}" >> $GITHUB_ENV
+
+    - name: "Flutter: Enable MacOS Desktop"
+      run: flutter config --enable-macos-desktop
+
+    - name: "Flutter: Build MacOS"
+      run: flutter build macos
+      
+    - name: Package MacOS App
+      run: |
+        python3 -m pip install setuptools
+        npm install -g appdmg
+        mkdir -p build/${{ env.BUILD_VERSION }}
+        appdmg appdmg.json build/dateapp-macos-universal.dmg
+
+    - name: Release to GitHub
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "build/dateapp-macos-universal.dmg"
+        tag: ${{ steps.version.outputs.content }}
+        commit: ${{ github.sha }}
+        allowUpdates: true 
+

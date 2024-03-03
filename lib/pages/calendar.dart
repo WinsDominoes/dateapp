@@ -44,11 +44,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
         DateFormat("dd MMM yyyy").format(endDate).toString();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Calendar Calculator"),
-        elevation: 4,
-        shadowColor: Theme.of(context).shadowColor,
-      ),
       body: _selectedDateRange == null
           ? const Padding(
               padding: EdgeInsets.all(30),

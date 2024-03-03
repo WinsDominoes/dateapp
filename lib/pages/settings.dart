@@ -1,6 +1,8 @@
+import 'package:dateapp/widgets/dialogs/community.dart';
 import 'package:flutter/material.dart';
-import '../widgets/license.dart';
-import '../constants/info.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../widgets/dialogs/about.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -19,11 +21,6 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Settings"),
-        elevation: 4,
-        shadowColor: Theme.of(context).shadowColor,
-      ),
       body: Column(
         children: [
           Expanded(
@@ -49,106 +46,64 @@ class _ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        children: [
-          Card(
-              elevation: 4.0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
-              margin: const EdgeInsets.all(8.0),
-              child: InkWell(
-                onTap: () => _dialogBuilder(context),
-                borderRadius: BorderRadius.circular(10.0),
+    return Column(
+      children: [
+        Card(
+          elevation: 4.0,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          margin: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () async {
+                  await launchUrl(
+                      Uri.parse(
+                          'https://git.winscloud.net/WinsDominoes/dateapp'),
+                      mode: LaunchMode.externalApplication);
+                },
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10.0),
+                    topRight: Radius.circular(10.0)),
                 child: const ListTile(
-                  leading: Icon(Icons.info_outlined),
-                  title: Text("About"),
-                ),
-              ))
-        ],
-      ),
-    );
-  }
-}
-
-class _PageButton extends StatelessWidget {
-  const _PageButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-        child: ElevatedButton(
-          onPressed: () {},
-          child: const Text("Some Button"),
-        ),
-      ),
-    );
-  }
-}
-
-Future<void> _dialogBuilder(BuildContext context) {
-  return showDialog<void>(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Row(
-          children: <Widget>[
-            Container(
-              width: 80,
-              height: 80,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  alignment: Alignment.centerLeft,
-                  image: ExactAssetImage('assets/app_icons/icon.png')
-                )
-              ),
-            ),
-            Container(
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Date Calculator"),
-                  Text(
-                    "v$versionString",
-                    style: TextStyle(
-                      fontSize: 14
-                    )
+                  leading: Icon(Icons.code),
+                  title: Text("Source Code"),
+                  trailing: Wrap(
+                    // space between two icons
+                    children: <Widget>[
+                      Icon(Icons.open_in_new), // icon-1// icon-2
+                    ],
                   ),
-                ],
+                ),
               ),
-            )
-          ]
-        ),
-        content: const Text(
-          'Date Calculator by WinsDominoes and AtiusAmy'
-        ),
-        actions: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: const Text('View Licenses'),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LicensePageCustom()));
-            },
+              const Divider(
+                height: 1.0,
+              ),
+              InkWell(
+                  onTap: () => communityDialogBuilder(context),
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(10.0),
+                      bottomRight: Radius.circular(10.0)),
+                  child: const ListTile(
+                    leading: Icon(Icons.people),
+                    title: Text("Join Community"),
+                  )),
+            ],
           ),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: const Text('Close'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
+        ),
+        Card(
+            elevation: 4.0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            margin: const EdgeInsets.all(8.0),
+            child: InkWell(
+              onTap: () => aboutDialogBuilder(context),
+              child: const ListTile(
+                leading: Icon(Icons.info_outlined),
+                title: Text("About"),
+              ),
+            ))
+      ],
+    );
+  }
 }
-

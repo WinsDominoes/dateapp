@@ -5,7 +5,7 @@
   <name>Date Calculator</name>
   <summary>The go-to minimal date calculator</summary>
   <url type="homepage">https://datecalculator.winscloud.net</url>
-  <url type="bugtracker">https://github.com/WinsDominoes/dateapp/issues</url>
+  <url type="bugtracker">https://git.winscloud.net/WinsDominoes/dateapp/issues</url>
 
   <metadata_license>MIT</metadata_license>
   <project_license>LGPL-2.1</project_license>
@@ -42,6 +42,10 @@
   </screenshots>
   <content_rating type="oars-1.0"/>
   <releases>
+    <release version="0.0.7" date="2024-03-03">
+    </release>
+    <release version="0.0.6" date="2024-02-03">
+    </release>
     <release version="0.0.5" date="2024-02-02">
     </release>
     <release version="0.0.4" date="2024-02-02">

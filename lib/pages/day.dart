@@ -48,11 +48,6 @@ class _DayScreenState extends State<DayScreen> {
         DateFormat("EEEE, d MMM yyyy").format(DateTime.now()).toString();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Day Calculator"),
-        elevation: 4,
-        shadowColor: Theme.of(context).shadowColor,
-      ),
       body: _selectedDate == null
           ? const Padding(
               padding: EdgeInsets.all(30),

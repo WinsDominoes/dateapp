@@ -1,13 +1,16 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'pages/calendar.dart';
 import 'pages/day.dart';
 import 'pages/settings.dart';
+import 'pages/test.dart';
 
 import 'utils/scroll.dart';
+
+import 'constants/info.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,16 +44,12 @@ class MyApp extends StatelessWidget {
       ThemeData lightTheme = ThemeData(
         colorScheme: lightColorScheme,
         useMaterial3: true,
-        navigationRailTheme: NavigationRailThemeData(
-            backgroundColor: Colors.black.withOpacity(0.03)),
       );
 
       ThemeData darkTheme = ThemeData(
         brightness: Brightness.dark,
         colorScheme: darkColorScheme,
         useMaterial3: true,
-        navigationRailTheme: NavigationRailThemeData(
-            backgroundColor: Colors.white.withOpacity(0.03)),
       );
 
       return MaterialApp(
@@ -87,42 +86,121 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveScaffold(
-      smallBreakpoint: const WidthPlatformBreakpoint(end: 700),
-      mediumBreakpoint: const WidthPlatformBreakpoint(begin: 700, end: 1000),
-      largeBreakpoint: const WidthPlatformBreakpoint(begin: 1000),
-      useDrawer: false,
-      selectedIndex: _selectedTab,
-      onSelectedIndexChange: (int index) {
-        setState(() {
-          _selectedTab = index;
-        });
-      },
-      destinations: const <NavigationDestination>[
-        NavigationDestination(
-          icon: Icon(Icons.calendar_month_outlined),
-          selectedIcon: Icon(Icons.calendar_month),
-          label: 'Calendar',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.calendar_today_outlined),
-          selectedIcon: Icon(Icons.calendar_today),
-          label: 'Day',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.settings_outlined),
-          selectedIcon: Icon(Icons.settings),
-          label: 'Settings',
-        ),
-      ],
-      body: (_) => _getScreen(context, _selectedTab),
-      smallBody: (_) => _getScreen(context, _selectedTab),
-      // Define a default secondaryBody.
-      // Override the default secondaryBody during the smallBreakpoint to be
-      // empty. Must use AdaptiveScaffold.emptyBuilder to ensure it is properly
-      // overridden.
-      smallSecondaryBody: AdaptiveScaffold.emptyBuilder,
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool extendedValue = true;
+    NavigationRailLabelType labelType = NavigationRailLabelType.none;
+    Widget leading = const Visibility(
+      visible: false,
+      child: SizedBox.shrink(),
     );
+
+    if (screenWidth >= 600 && screenWidth < 800) {
+      extendedValue = false;
+      labelType = NavigationRailLabelType.all;
+    }
+
+    if (screenWidth >= 800) {
+      leading = Visibility(
+        visible: true,
+        child: Column(
+          children: [
+            SvgPicture.asset(iconPath, semanticsLabel: 'Acme Logo'),
+            const Text(
+              "Date Calculator",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+            ),
+            const SizedBox(
+              height: 5,
+            )
+          ],
+        ),
+      );
+    }
+
+    return LayoutBuilder(builder: (context, constraints) {
+      return Scaffold(
+        bottomNavigationBar: MediaQuery.of(context).size.width < 600
+            ? NavigationBar(
+                onDestinationSelected: (int index) {
+                  setState(() {
+                    _selectedTab = index;
+                  });
+                },
+                indicatorColor:
+                    Theme.of(context).colorScheme.secondaryContainer,
+                selectedIndex: _selectedTab,
+                destinations: const <Widget>[
+                    NavigationDestination(
+                      icon: Icon(Icons.calendar_month_outlined),
+                      selectedIcon: Icon(Icons.calendar_month),
+                      label: 'Calendar',
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.calendar_today_outlined),
+                      selectedIcon: Icon(Icons.calendar_today),
+                      label: 'Day',
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.settings_outlined),
+                      selectedIcon: Icon(Icons.settings),
+                      label: 'Day',
+                    ),
+                  ])
+            : null,
+        body: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            if (MediaQuery.of(context).size.width >= 600)
+              SafeArea(
+                child: NavigationRail(
+                  labelType: labelType,
+                  elevation: 4,
+                  leading: leading,
+                  backgroundColor: ElevationOverlay.applySurfaceTint(
+                      Theme.of(context).cardColor,
+                      Theme.of(context).colorScheme.surfaceTint,
+                      1),
+                  extended: extendedValue,
+                  destinations: const [
+                    NavigationRailDestination(
+                      icon: Icon(Icons.calendar_month_outlined),
+                      selectedIcon: Icon(Icons.calendar_month),
+                      label: Text('Calendar'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.calendar_today_outlined),
+                      selectedIcon: Icon(Icons.calendar_today),
+                      label: Text('Day'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.settings_outlined),
+                      selectedIcon: Icon(Icons.settings),
+                      label: Text('Settings'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.edit),
+                      selectedIcon: Icon(Icons.edit),
+                      label: Text('Edit'),
+                    )
+                  ],
+                  selectedIndex: _selectedTab,
+                  onDestinationSelected: (value) {
+                    setState(() {
+                      _selectedTab = value;
+                    });
+                  },
+                ),
+              ),
+            Expanded(
+              child: Container(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                child: _getScreen(context, _selectedTab),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
 
@@ -134,6 +212,8 @@ Widget _getScreen(BuildContext context, int index) {
       return const DayScreen();
     case 2:
       return const SettingsScreen();
+    case 3:
+      return const TestScreen();
     default:
       return const Text('Something went wrong');
   }

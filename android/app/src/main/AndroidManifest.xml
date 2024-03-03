@@ -23,21 +23,20 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <queries>
-                <intent>
+
+                <intent-filter>
                     <action android:name="android.intent.action.VIEW" />
                     <category android:name="android.intent.category.BROWSABLE" />
                     <data android:scheme="https" />
-                </intent>
-                <intent>
+                </intent-filter>
+                <intent-filter>
                     <action android:name="android.intent.action.DIAL" />
                     <data android:scheme="tel" />
-                </intent>
-                <intent>
+                </intent-filter>
+                <intent-filter>
                     <action android:name="android.intent.action.SEND" />
                     <data android:mimeType="*/*" />
-                </intent>
-            </queries>
+                </intent-filter>
             
         </activity>
         <!-- Don't delete the meta-data below.

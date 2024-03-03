@@ -1,8 +1,8 @@
-import 'package:dateapp/widgets/dialogs/community.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/dialogs/about.dart';
+import '../widgets/dialogs/community.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);

@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'pages/calendar.dart';
 import 'pages/day.dart';
 import 'pages/settings.dart';
-import 'pages/test.dart';
 
 import 'utils/scroll.dart';
 
@@ -104,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
         visible: true,
         child: Column(
           children: [
-            SvgPicture.asset(iconPath, semanticsLabel: 'Acme Logo'),
+            SvgPicture.asset(iconPath, semanticsLabel: 'Date Calculator Logo'),
             const Text(
               "Date Calculator",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
@@ -143,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     NavigationDestination(
                       icon: Icon(Icons.settings_outlined),
                       selectedIcon: Icon(Icons.settings),
-                      label: 'Day',
+                      label: 'Settings',
                     ),
                   ])
             : null,
@@ -177,11 +176,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       selectedIcon: Icon(Icons.settings),
                       label: Text('Settings'),
                     ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.edit),
-                      selectedIcon: Icon(Icons.edit),
-                      label: Text('Edit'),
-                    )
                   ],
                   selectedIndex: _selectedTab,
                   onDestinationSelected: (value) {
@@ -212,8 +206,6 @@ Widget _getScreen(BuildContext context, int index) {
       return const DayScreen();
     case 2:
       return const SettingsScreen();
-    case 3:
-      return const TestScreen();
     default:
       return const Text('Something went wrong');
   }

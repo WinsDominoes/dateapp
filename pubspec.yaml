@@ -81,6 +81,9 @@ flutter:
   assets:
     - assets/app_icons/icon.png
     - assets/app_icons/net.winscloud.Datecalculator.svg
+    - assets/app_icons/external/Discord.svg
+    - assets/app_icons/external/Matrix.svg
+    - assets/app_icons/external/Telegram.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

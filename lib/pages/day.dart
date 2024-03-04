@@ -102,7 +102,7 @@ class _DayScreenState extends State<DayScreen> {
       // This button is used to show the date range picker
       floatingActionButton: FloatingActionButton(
         onPressed: showDateDialog,
-        child: const Icon(Icons.today),
+        child: const Icon(Icons.border_color_outlined),
       ),
     );
   }

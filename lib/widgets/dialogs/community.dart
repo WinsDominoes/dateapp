@@ -7,6 +7,8 @@ const matrixSVG = "assets/app_icons/external/Matrix.svg";
 const telegramSVG = "assets/app_icons/external/Telegram.svg";
 
 Future<void> communityDialogBuilder(BuildContext context) {
+  final colorMode = Theme.of(context).colorScheme.primary;
+
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
@@ -24,8 +26,7 @@ Future<void> communityDialogBuilder(BuildContext context) {
                   child: SvgPicture.asset(
                     discordSVG,
                     semanticsLabel: 'Discord Logo',
-                    colorFilter:
-                        const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(colorMode, BlendMode.srcIn),
                     width: 50,
                     height: 50,
                   ),
@@ -49,14 +50,17 @@ Future<void> communityDialogBuilder(BuildContext context) {
                   child: SvgPicture.asset(
                     matrixSVG,
                     semanticsLabel: 'Matrix Logo',
-                    colorFilter:
-                        const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(colorMode, BlendMode.srcIn),
                     width: 50,
                     height: 50,
                   ),
                 ),
                 const Expanded(
-                  child: Text('Matrix', textAlign: TextAlign.center),
+                  child: Text(
+                    'Matrix',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ],
             ),
@@ -72,8 +76,7 @@ Future<void> communityDialogBuilder(BuildContext context) {
                   child: SvgPicture.asset(
                     telegramSVG,
                     semanticsLabel: 'Telegram Logo',
-                    colorFilter:
-                        const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(colorMode, BlendMode.srcIn),
                     width: 50,
                     height: 50,
                   ),

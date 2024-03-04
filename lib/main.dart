@@ -49,6 +49,9 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         colorScheme: darkColorScheme,
         useMaterial3: true,
+        navigationRailTheme: const NavigationRailThemeData(
+            unselectedLabelTextStyle: TextStyle(fontSize: 13),
+            selectedLabelTextStyle: TextStyle(fontSize: 13)),
       );
 
       return MaterialApp(
@@ -130,13 +133,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 selectedIndex: _selectedTab,
                 destinations: const <Widget>[
                     NavigationDestination(
-                      icon: Icon(Icons.calendar_month_outlined),
-                      selectedIcon: Icon(Icons.calendar_month),
-                      label: 'Calendar',
+                      icon: Icon(Icons.date_range_outlined),
+                      selectedIcon: Icon(Icons.date_range),
+                      label: 'Range',
                     ),
                     NavigationDestination(
-                      icon: Icon(Icons.calendar_today_outlined),
-                      selectedIcon: Icon(Icons.calendar_today),
+                      icon: Icon(Icons.today_outlined),
+                      selectedIcon: Icon(Icons.today),
                       label: 'Day',
                     ),
                     NavigationDestination(
@@ -162,13 +165,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   extended: extendedValue,
                   destinations: const [
                     NavigationRailDestination(
-                      icon: Icon(Icons.calendar_month_outlined),
-                      selectedIcon: Icon(Icons.calendar_month),
-                      label: Text('Calendar'),
+                      icon: Icon(Icons.date_range_outlined),
+                      selectedIcon: Icon(Icons.date_range),
+                      label: Text('Range'),
                     ),
                     NavigationRailDestination(
-                      icon: Icon(Icons.calendar_today_outlined),
-                      selectedIcon: Icon(Icons.calendar_today),
+                      icon: Icon(Icons.today_outlined),
+                      selectedIcon: Icon(Icons.today),
                       label: Text('Day'),
                     ),
                     NavigationRailDestination(

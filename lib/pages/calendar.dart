@@ -33,6 +33,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
     final startDate = _selectedDateRange?.start ?? DateTime(2020, 1, 1);
     final endDate = _selectedDateRange?.end ?? DateTime(2022, 1, 1);
+    final textTheme = Theme.of(context).textTheme;
 
     int diffD = GregorianDate.differenceInDays(startDate, endDate);
 
@@ -45,16 +46,42 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
     return Scaffold(
       body: _selectedDateRange == null
-          ? const Padding(
+          ? Padding(
               padding: EdgeInsets.all(16),
               child: Center(
-                child:
-                    Text('Select the date range by using the calendar button'),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.date_range_outlined,
+                      size: 150,
+                    ),
+                    Text('Date Range',
+                        style: TextStyle(
+                            fontSize: textTheme.displaySmall?.fontSize,
+                            fontWeight: FontWeight.bold)),
+                    Text('Select the date range',
+                        style: TextStyle(
+                          fontSize: textTheme.bodyMedium?.fontSize,
+                        ))
+                  ],
+                ),
               ),
             )
           : Padding(
               padding: const EdgeInsets.all(16),
-              child: Column(children: [
+              child: ListView(children: [
+                Container(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: <Widget>[
+                        Text("Range",
+                            style: TextStyle(
+                                fontSize: textTheme.displaySmall?.fontSize,
+                                fontWeight: FontWeight.bold))
+                      ],
+                    )),
                 Card(
                     child: Padding(
                         padding: const EdgeInsets.all(16),
@@ -64,11 +91,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text("Difference",
-                                  style: TextStyle(
-                                    fontSize: 40,
-                                  )),
-                              const Text("Date Range",
+                              const Text("Full Format",
                                   style: TextStyle(fontSize: 14)),
                               Text(
                                   "${diffYMD[3]} days \n${diffYMD[2]} weeks \n${diffYMD[1]} months\n${diffYMD[0]} years",
@@ -76,7 +99,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold)),
                               const SizedBox(height: 10),
-                              const Text("Date Range in days",
+                              const Text("Days Format",
                                   style: TextStyle(fontSize: 14)),
                               Text("$diffD days",
                                   style: const TextStyle(
@@ -86,6 +109,16 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           ),
                         ))),
                 const SizedBox(height: 16),
+                Container(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: <Widget>[
+                        Text("Dates",
+                            style: TextStyle(
+                                fontSize: textTheme.displaySmall?.fontSize,
+                                fontWeight: FontWeight.bold))
+                      ],
+                    )),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -95,10 +128,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Dates", style: TextStyle(fontSize: 40)),
                             const Text("Start Date",
                                 style: TextStyle(fontSize: 14)),
-                            const SizedBox(height: 5),
                             Text(
                               startDateString,
                               style: const TextStyle(
@@ -107,7 +138,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             const SizedBox(height: 10),
                             const Text("End Date",
                                 style: TextStyle(fontSize: 14)),
-                            const SizedBox(height: 5),
                             Text(endDateString,
                                 style: const TextStyle(
                                     fontSize: 22, fontWeight: FontWeight.bold)),
@@ -119,7 +149,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       // This button is used to show the date range picker
       floatingActionButton: FloatingActionButton(
         onPressed: showRangeDialog,
-        child: const Icon(Icons.date_range),
+        child: const Icon(Icons.edit_calendar),
       ),
     );
   }

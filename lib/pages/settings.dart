@@ -20,12 +20,26 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 16, left: 16),
+            child: Container(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: <Widget>[
+                    Text("Settings",
+                        style: TextStyle(
+                            fontSize: textTheme.displayMedium?.fontSize,
+                            fontWeight: FontWeight.bold))
+                  ],
+                )),
+          ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
               child: ListView.separated(
                 itemBuilder: (context, index) => const _ListItem(),
                 separatorBuilder: (context, index) => const SizedBox(
@@ -49,7 +63,7 @@ class _ListItem extends StatelessWidget {
     return Column(
       children: [
         Card(
-          elevation: 4.0,
+          elevation: 4,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           margin: const EdgeInsets.all(8.0),
@@ -98,6 +112,7 @@ class _ListItem extends StatelessWidget {
             margin: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () => aboutDialogBuilder(context),
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               child: const ListTile(
                 leading: Icon(Icons.info_outlined),
                 title: Text("About"),

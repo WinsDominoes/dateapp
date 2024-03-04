@@ -39,19 +39,45 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         );
       }
+      final textTheme = Theme.of(context).textTheme;
 
       ThemeData lightTheme = ThemeData(
         colorScheme: lightColorScheme,
         useMaterial3: true,
+        navigationRailTheme: NavigationRailThemeData(
+          unselectedLabelTextStyle: TextStyle(
+              fontSize: textTheme.labelLarge?.fontSize, color: Colors.black),
+          unselectedIconTheme: const IconThemeData(
+            color: Colors.black,
+          ),
+          selectedLabelTextStyle: TextStyle(
+            fontSize: textTheme.labelLarge?.fontSize,
+            color: Colors.black,
+          ),
+          selectedIconTheme: const IconThemeData(
+            color: Colors.black,
+          ),
+        ),
       );
 
       ThemeData darkTheme = ThemeData(
         brightness: Brightness.dark,
         colorScheme: darkColorScheme,
         useMaterial3: true,
-        navigationRailTheme: const NavigationRailThemeData(
-            unselectedLabelTextStyle: TextStyle(fontSize: 13),
-            selectedLabelTextStyle: TextStyle(fontSize: 13)),
+        navigationRailTheme: NavigationRailThemeData(
+          unselectedLabelTextStyle: TextStyle(
+              fontSize: textTheme.labelLarge?.fontSize, color: Colors.white),
+          unselectedIconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          selectedLabelTextStyle: TextStyle(
+            fontSize: textTheme.labelLarge?.fontSize,
+            color: Colors.white,
+          ),
+          selectedIconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+        ),
       );
 
       return MaterialApp(
@@ -91,6 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
     double screenWidth = MediaQuery.of(context).size.width;
     bool extendedValue = true;
     NavigationRailLabelType labelType = NavigationRailLabelType.none;
+    final textTheme = Theme.of(context).textTheme;
+
     Widget leading = const Visibility(
       visible: false,
       child: SizedBox.shrink(),
@@ -107,9 +135,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             SvgPicture.asset(iconPath, semanticsLabel: 'Date Calculator Logo'),
-            const Text(
+            Text(
               "Date Calculator",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: textTheme.headlineLarge?.fontSize),
             ),
             const SizedBox(
               height: 5,

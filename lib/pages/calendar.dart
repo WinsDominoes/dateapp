@@ -47,7 +47,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Scaffold(
       body: _selectedDateRange == null
           ? Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -61,7 +61,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         style: TextStyle(
                             fontSize: textTheme.displaySmall?.fontSize,
                             fontWeight: FontWeight.bold)),
-                    Text('Select the date range',
+                    Text('Select a date range in the bottom right corner',
                         style: TextStyle(
                           fontSize: textTheme.bodyMedium?.fontSize,
                         ))
@@ -78,11 +78,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       children: <Widget>[
                         Text("Range",
                             style: TextStyle(
-                                fontSize: textTheme.displaySmall?.fontSize,
+                                fontSize: textTheme.displayMedium?.fontSize,
                                 fontWeight: FontWeight.bold))
                       ],
                     )),
                 Card(
+                    elevation: 4,
                     child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: SizedBox(
@@ -91,19 +92,25 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text("Full Format",
-                                  style: TextStyle(fontSize: 14)),
+                              Text("Full Format",
+                                  style: TextStyle(
+                                      fontSize:
+                                          textTheme.titleMedium?.fontSize)),
                               Text(
                                   "${diffYMD[3]} days \n${diffYMD[2]} weeks \n${diffYMD[1]} months\n${diffYMD[0]} years",
-                                  style: const TextStyle(
-                                      fontSize: 24,
+                                  style: TextStyle(
+                                      fontSize:
+                                          textTheme.headlineMedium?.fontSize,
                                       fontWeight: FontWeight.bold)),
                               const SizedBox(height: 10),
-                              const Text("Days Format",
-                                  style: TextStyle(fontSize: 14)),
+                              Text("Days Format",
+                                  style: TextStyle(
+                                      fontSize:
+                                          textTheme.titleMedium?.fontSize)),
                               Text("$diffD days",
-                                  style: const TextStyle(
-                                      fontSize: 24,
+                                  style: TextStyle(
+                                      fontSize:
+                                          textTheme.headlineMedium?.fontSize,
                                       fontWeight: FontWeight.bold)),
                             ],
                           ),
@@ -120,6 +127,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       ],
                     )),
                 Card(
+                  elevation: 4,
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: SizedBox(
@@ -128,19 +136,24 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Start Date",
-                                style: TextStyle(fontSize: 14)),
+                            Text("Start Date",
+                                style: TextStyle(
+                                    fontSize: textTheme.titleMedium?.fontSize)),
                             Text(
                               startDateString,
-                              style: const TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: textTheme.headlineMedium?.fontSize,
+                                  fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 10),
-                            const Text("End Date",
-                                style: TextStyle(fontSize: 14)),
+                            Text("End Date",
+                                style: TextStyle(
+                                    fontSize: textTheme.titleMedium?.fontSize)),
                             Text(endDateString,
-                                style: const TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold)),
+                                style: TextStyle(
+                                    fontSize:
+                                        textTheme.headlineMedium?.fontSize,
+                                    fontWeight: FontWeight.bold)),
                           ],
                         )),
                   ),

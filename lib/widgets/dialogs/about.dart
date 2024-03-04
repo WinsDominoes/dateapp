@@ -3,6 +3,7 @@ import '../license.dart';
 import '../../constants/info.dart';
 
 Future<void> aboutDialogBuilder(BuildContext context) {
+  final textTheme = Theme.of(context).textTheme;
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
@@ -14,14 +15,17 @@ Future<void> aboutDialogBuilder(BuildContext context) {
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     alignment: Alignment.centerLeft,
-                    image: ExactAssetImage('assets/app_icons/icon.png'))),
+                    image: ExactAssetImage(iconPathPng))),
           ),
           Container(
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Date Calculator"),
-                Text("v$versionString", style: TextStyle(fontSize: 14)),
+                Text("Date Calculator",
+                    style:
+                        TextStyle(fontSize: textTheme.headlineSmall?.fontSize)),
+                Text("v$versionString",
+                    style: TextStyle(fontSize: textTheme.bodyLarge?.fontSize)),
               ],
             ),
           )

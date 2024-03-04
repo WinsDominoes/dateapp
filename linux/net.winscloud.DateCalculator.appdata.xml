@@ -46,15 +46,65 @@
   </branding>
   <content_rating type="oars-1.0"/>
   <releases>
-    <release version="0.0.7" date="2024-03-03">
+    <release version="0.0.7" date="2024-03-04">
+      <description>
+        <ul>
+          <li>UI deisng overhaul</li>
+          <li>New navigation bar, removed slow animations</li>
+          <li>Modified "Calendar" to "Range"</li>
+          <li>Minor icon changes</li>
+          <li>Added source code and community links</li>
+          <li>Font modification: Following device's TextTheme</li>
+          <li>Removed unnecessary / unused libraries</li>
+        </ul>
+      </description>
     </release>
     <release version="0.0.6" date="2024-02-03">
+      <description>
+        <ul>
+          <li>Fixed touchscreen scrolling issues</li>
+        </ul>
+      </description>
     </release>
     <release version="0.0.5" date="2024-02-02">
+      <description>
+        <ul>
+          <li>Added ARM version</li>
+          <li>Added Settings page</li>
+          <li>Fallback for dynamic color is now blue</li>
+        </ul>
+      </description>
     </release>
     <release version="0.0.4" date="2024-02-02">
+      <description>
+        <ul>
+          <li>UI is now responsive</li>
+          <li>Day mode added</li>
+          <li>Added dynamic color support - following your accent color</li>
+        </ul>
+      </description>
     </release>
     <release version="0.0.3" date="2024-01-31">
+      <description>
+        <ul>
+          <li>Updated AppBar to Material You Look</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.0.2" date="2024-01-24">
+      <description>
+        <ul>
+          <li>Added dark mode</li>
+          <li>UI element following a static color</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.0.1" date="2024-01-22">
+      <description>
+        <ul>
+          <li>Initial Release</li>
+        </ul>
+      </description>
     </release>
   </releases>
 </component>

@@ -32,6 +32,8 @@ class _DayScreenState extends State<DayScreen> {
     }
 
     final pickedDate = _selectedDate ?? DateTime.now();
+    final textTheme = Theme.of(context).textTheme;
+
     // List<int> diffYMD = GregorianDate.differenceInYearsMonthsDays(DateTime.now(), pickedDate);
     int diffD = GregorianDate.differenceInDays(DateTime.now(), pickedDate);
     List<int> diffYMD = GregorianDate.differenceInYearsMonthsDays(diffD);
@@ -44,61 +46,81 @@ class _DayScreenState extends State<DayScreen> {
 
     dynamic pickedDateString =
         DateFormat("EEEE, d MMM yyyy").format(pickedDate).toString();
-    dynamic todayString =
-        DateFormat("EEEE, d MMM yyyy").format(DateTime.now()).toString();
 
     return Scaffold(
       body: _selectedDate == null
-          ? const Padding(
-              padding: EdgeInsets.all(30),
+          ? Padding(
+              padding: const EdgeInsets.all(16),
               child: Center(
-                child: Text('Select the date by using the date picker button'),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.today_outlined,
+                      size: 150,
+                    ),
+                    Text('Days From Now',
+                        style: TextStyle(
+                            fontSize: textTheme.displaySmall?.fontSize,
+                            fontWeight: FontWeight.bold)),
+                    Text('Select a date in the bottom right corner',
+                        style: TextStyle(
+                          fontSize: textTheme.bodyMedium?.fontSize,
+                        ))
+                  ],
+                ),
               ),
             )
           : Padding(
-              padding: const EdgeInsets.all(30),
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text("Dates",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold)),
-                    const Text("Chosen Date", style: TextStyle(fontSize: 14)),
-                    Text(
-                      pickedDateString,
-                      style: const TextStyle(
-                          fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 5),
-                    const Text("Today", style: TextStyle(fontSize: 14)),
-                    Text(
-                      todayString,
-                      style: const TextStyle(
-                          fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text("Difference",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold)),
-                    Text(pickedDateString,
-                        style: const TextStyle(fontSize: 14)),
-                    Text(
-                        "${diffYMD[3]} days \n${diffYMD[2]} weeks \n${diffYMD[1]} months\n${diffYMD[0]} years",
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
-                    Text(period, style: const TextStyle(fontSize: 14)),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text("Or in total is",
-                        style: TextStyle(fontSize: 14)),
-                    Text("$diffD days $period",
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              )),
+              padding: const EdgeInsets.all(16),
+              child: ListView(children: [
+                Container(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: <Widget>[
+                        Text("Results",
+                            style: TextStyle(
+                                fontSize: textTheme.displayMedium?.fontSize,
+                                fontWeight: FontWeight.bold))
+                      ],
+                    )),
+                Card(
+                    elevation: 4,
+                    child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "$pickedDateString is",
+                                style: TextStyle(
+                                    fontSize:
+                                        textTheme.headlineSmall?.fontSize),
+                              ),
+                              Text(
+                                  "${diffYMD[3]} days \n${diffYMD[2]} weeks \n${diffYMD[1]} months\n${diffYMD[0]} years",
+                                  style: TextStyle(
+                                      fontSize:
+                                          textTheme.headlineMedium?.fontSize,
+                                      fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 10),
+                              Text("or in total of",
+                                  style: TextStyle(
+                                      fontSize:
+                                          textTheme.titleMedium?.fontSize)),
+                              Text("$diffD days $period",
+                                  style: TextStyle(
+                                      fontSize:
+                                          textTheme.headlineMedium?.fontSize,
+                                      fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                        ))),
+              ])),
       // This button is used to show the date range picker
       floatingActionButton: FloatingActionButton(
         onPressed: showDateDialog,

@@ -8,6 +8,7 @@ const telegramSVG = "assets/app_icons/external/Telegram.svg";
 
 Future<void> communityDialogBuilder(BuildContext context) {
   final colorMode = Theme.of(context).colorScheme.primary;
+  final textTheme = Theme.of(context).textTheme;
 
   return showDialog<void>(
     context: context,
@@ -31,8 +32,10 @@ Future<void> communityDialogBuilder(BuildContext context) {
                     height: 50,
                   ),
                 ),
-                const Expanded(
-                  child: Text('Discord', textAlign: TextAlign.center),
+                Expanded(
+                  child: Text('Discord',
+                      style: TextStyle(fontSize: textTheme.bodyLarge?.fontSize),
+                      textAlign: TextAlign.center),
                 ),
               ],
             ),
@@ -55,11 +58,11 @@ Future<void> communityDialogBuilder(BuildContext context) {
                     height: 50,
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   child: Text(
                     'Matrix',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: textTheme.bodyLarge?.fontSize),
                   ),
                 ),
               ],
@@ -81,8 +84,10 @@ Future<void> communityDialogBuilder(BuildContext context) {
                     height: 50,
                   ),
                 ),
-                const Expanded(
-                  child: Text('Telegram', textAlign: TextAlign.center),
+                Expanded(
+                  child: Text('Telegram',
+                      style: TextStyle(fontSize: textTheme.bodyLarge?.fontSize),
+                      textAlign: TextAlign.center),
                 ),
               ],
             ),

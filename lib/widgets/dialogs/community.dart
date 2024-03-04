@@ -39,7 +39,8 @@ Future<void> communityDialogBuilder(BuildContext context) {
           SimpleDialogOption(
             onPressed: () async {
               await launchUrl(
-                  Uri.parse('matrix.to/#/#datecalc:matrix.winscloud.net'),
+                  Uri.parse(
+                      'https://matrix.to/#/#datecalc:matrix.winscloud.net'),
                   mode: LaunchMode.externalApplication);
             },
             child: Row(

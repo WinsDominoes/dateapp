@@ -46,53 +46,76 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Scaffold(
       body: _selectedDateRange == null
           ? const Padding(
-              padding: EdgeInsets.all(30),
+              padding: EdgeInsets.all(16),
               child: Center(
                 child:
                     Text('Select the date range by using the calendar button'),
               ),
             )
           : Padding(
-              padding: const EdgeInsets.all(30),
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text("Dates",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold)),
-                    const Text("Start Date", style: TextStyle(fontSize: 14)),
-                    const SizedBox(height: 5),
-                    Text(
-                      startDateString,
-                      style: const TextStyle(
-                          fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 10),
-                    const Text("End Date", style: TextStyle(fontSize: 14)),
-                    const SizedBox(height: 5),
-                    Text(endDateString,
-                        style: const TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 20),
-                    const Text("Difference",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold)),
-                    const Text("Date Range", style: TextStyle(fontSize: 14)),
-                    Text(
-                        "${diffYMD[3]} days \n${diffYMD[2]} weeks \n${diffYMD[1]} months\n${diffYMD[0]} years",
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 10),
-                    const Text("Date Range in days",
-                        style: TextStyle(fontSize: 14)),
-                    Text("$diffD days",
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ),
-            ),
+              padding: const EdgeInsets.all(16),
+              child: Column(children: [
+                Card(
+                    child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text("Difference",
+                                  style: TextStyle(
+                                    fontSize: 40,
+                                  )),
+                              const Text("Date Range",
+                                  style: TextStyle(fontSize: 14)),
+                              Text(
+                                  "${diffYMD[3]} days \n${diffYMD[2]} weeks \n${diffYMD[1]} months\n${diffYMD[0]} years",
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 10),
+                              const Text("Date Range in days",
+                                  style: TextStyle(fontSize: 14)),
+                              Text("$diffD days",
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                        ))),
+                const SizedBox(height: 16),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: SizedBox(
+                        width: double.infinity,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Dates", style: TextStyle(fontSize: 40)),
+                            const Text("Start Date",
+                                style: TextStyle(fontSize: 14)),
+                            const SizedBox(height: 5),
+                            Text(
+                              startDateString,
+                              style: const TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 10),
+                            const Text("End Date",
+                                style: TextStyle(fontSize: 14)),
+                            const SizedBox(height: 5),
+                            Text(endDateString,
+                                style: const TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold)),
+                          ],
+                        )),
+                  ),
+                )
+              ])),
       // This button is used to show the date range picker
       floatingActionButton: FloatingActionButton(
         onPressed: showRangeDialog,

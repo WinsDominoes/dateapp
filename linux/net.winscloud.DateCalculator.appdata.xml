@@ -40,6 +40,10 @@
       <image>https://raw.githubusercontent.com/AtiusAmy/atiusamy.github.io/master/images/2020-07-12_17.29.36.png</image>
     </screenshot>
   </screenshots>
+  <branding>
+    <color type="primary" scheme_preference="light">#6f6385</color>
+    <color type="primary" scheme_preference="dark">#130b22</color>
+  </branding>
   <content_rating type="oars-1.0"/>
   <releases>
     <release version="0.0.7" date="2024-03-03">

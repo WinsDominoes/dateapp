@@ -80,7 +80,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/app_icons/icon.png
-    - assets/app_icons/net.winscloud.Datecalculator.svg
+    - assets/app_icons/net.winscloud.DateCalculator.svg
     - assets/app_icons/external/Discord.svg
     - assets/app_icons/external/Matrix.svg
     - assets/app_icons/external/Telegram.svg

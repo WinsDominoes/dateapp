@@ -17,7 +17,7 @@ Future<void> aboutDialogBuilder(BuildContext context) {
                     alignment: Alignment.centerLeft,
                     image: ExactAssetImage(iconPathPng))),
           ),
-          Container(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
